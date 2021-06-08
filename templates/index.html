@@ -71,6 +71,7 @@
             left: 20px;
             transform: translateY(-50%);
             color: #007bff;
+            cursor: pointer;
         }
 
         .slide_right {
@@ -80,6 +81,7 @@
             right: 20px;
             transform: translateY(-50%);
             color: #007bff;
+            cursor: pointer;
         }
 
         .hair_name {
@@ -151,7 +153,7 @@
         }
 
         .card-title {
-            font-size: 3vh;
+            font-size: 2.5vh;
         }
 
         .card-text {
@@ -167,26 +169,26 @@
         }
     </style>
     <script>
-          $('.collapse').on('show.bs.collapse', function () {
-        var target = $("[href='#" + $(this).prop("id") + "']");
-        target.removeClass("fa-plus-square");
-        target.addClass("fa-minus-square");
-    });
-    $('.collapse').on('shown.bs.collapse', function () {
-        var target = $("[href='#" + $(this).prop("id") + "']");
-        target.removeClass("fa-plus-square");
-        target.addClass("fa-minus-square");
-    });
-    $('.collapse').on('hide.bs.collapse', function () {
-        var target = $("[href='#" + $(this).prop("id") + "']");
-        target.removeClass("fa-minus-square");
-        target.addClass("fa-plus-square");
-    });
-    $('.collapse').on('hidden.bs.collapse', function () {
-        var target = $("[href='#" + $(this).prop("id") + "']");
-        target.removeClass("fa-minus-square");
-        target.addClass("fa-plus-square");
-    });
+        $('.collapse').on('show.bs.collapse', function () {
+            var target = $("[href='#" + $(this).prop("id") + "']");
+            target.removeClass("fa-plus-square");
+            target.addClass("fa-minus-square");
+        });
+        $('.collapse').on('shown.bs.collapse', function () {
+            var target = $("[href='#" + $(this).prop("id") + "']");
+            target.removeClass("fa-plus-square");
+            target.addClass("fa-minus-square");
+        });
+        $('.collapse').on('hide.bs.collapse', function () {
+            var target = $("[href='#" + $(this).prop("id") + "']");
+            target.removeClass("fa-minus-square");
+            target.addClass("fa-plus-square");
+        });
+        $('.collapse').on('hidden.bs.collapse', function () {
+            var target = $("[href='#" + $(this).prop("id") + "']");
+            target.removeClass("fa-minus-square");
+            target.addClass("fa-plus-square");
+        });
     </script>
 </head>
 <body>
@@ -282,38 +284,7 @@
 
     <h3 class="sub_title">나의 예약 현황</h3>
     <div class="reservation_history">
-        <div class="card" style="width: 48%">
-            <div class="card-body">
-                <h2 class="card-title">2021.05.12</h2>
-                <p class="card-text">헤어스타일 : 댄디컷</p>
-                <p class="card-text">기타 건의사항 : 10분정도 늦을수도 있어요</p>
-                <a href="#" class="btn btn-primary">더보기</a>
-            </div>
-        </div>
-        <div class="card" style="width: 48%">
-            <div class="card-body">
-                <h2 class="card-title">2021.05.12</h2>
-                <p class="card-text">헤어스타일 : 댄디컷</p>
-                <p class="card-text">기타 건의사항 : 10분정도 늦을수도 있어요</p>
-                <a href="#" class="btn btn-primary">더보기</a>
-            </div>
-        </div>
-        <div class="card" style="width: 48%">
-            <div class="card-body">
-                <h2 class="card-title">2021.05.12</h2>
-                <p class="card-text">헤어스타일 : 댄디컷</p>
-                <p class="card-text">기타 건의사항 : 10분정도 늦을수도 있어요</p>
-                <a href="#" class="btn btn-primary">더보기</a>
-            </div>
-        </div>
-        <div class="card" style="width: 48%">
-            <div class="card-body">
-                <h2 class="card-title">2021.05.12</h2>
-                <p class="card-text">헤어스타일 : 댄디컷</p>
-                <p class="card-text">기타 건의사항 : 10분정도 늦을수도 있어요</p>
-                <a href="#" class="btn btn-primary">더보기</a>
-            </div>
-        </div>
+
     </div>
 </div>
 <script type="text/javascript">
@@ -418,6 +389,7 @@
                 $(".reservation_history").html("");
                 for (let property in result) {
                     let {hair, date, time, etc} = result[property];
+                    etc = etc == "" ? "없음" : etc;
                     let cardTemp = `
         <div class="card" style="width: 48%">
             <div class="card-body">
