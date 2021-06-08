@@ -137,5 +137,27 @@ def update_like():
         return redirect(url_for("home"))
 
 
+@app.route('/reservation_history', methods=['GET'])
+def reservation_get():
+   # user_id는 로그인한 정보에서 받아야함
+   reservation_history = list(db.reservation.find({'user_id': 'zlzlzlmo'}, {'_id': False}))
+   return jsonify(reservation_history)
+
+@app.route('/reservation_confirm', methods=['POST'])
+def reservation_post():
+   db = client.revHair
+
+   hair = request.form.get('hair');
+   time = request.form.get('time');
+   date = request.form.get('date');
+   etc = request.form.get('etc');
+   user_id = request.form.get('user_id');
+
+   doc = {'hair':hair,'time':time,'date':date,'etc':etc,'user_id':user_id}
+   db.reservation.insert_one(doc)
+
+   return jsonify({'result':'success', 'msg': '예약이 완료되었습니다!'})
+
+
 if __name__ == '__main__':
     app.run('0.0.0.0', port=8080, debug=True)
