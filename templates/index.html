@@ -1,68 +1,173 @@
-<!doctype html>
-<html lang="ko">
-    <head>
-
-        <!-- Webpage Title -->
-        <title>예약HAIR</title>
-
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-        <!-- Bulma CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-        <!-- Font Awesome CSS -->
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
-        <!-- JS -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
 
-        <script>
-        </script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+    />
+    <link
+            rel="stylesheet"
+            href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css"
+    />
+    <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
 
-    </head>
-    <body>
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    />
+
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+    />
+    <script
+            type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+    ></script>
+
+    <title>Document</title>
     <style>
-    .reservation-button {
-        text-align: right;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+        }
 
-    .panel-heading {
-        height: 50px;
-    }
+        #container {
+            max-width: 720px;
+            margin: auto;
+        }
 
-    .panel-group {
-        width: 800px;
-    }
+        ul {
+            list-style: none;
+        }
 
-    .name {
-        font-size: 20px;
-        margin-right: 650px;
-    }
+        .hair_img_wrapper {
+            width: 80%;
+            margin: auto;
+            position: relative;
+        }
 
-    .introduce {
-        margin-top: 100px;
-        text-align: left;
-    }
+        .hair_img_wrapper .slide {
+            cursor: pointer;
+        }
 
-    .designer {
-        text-align: left;
-        margin-left: 20px;
-        margin-bottom: 20px;
-    }
+        .hair_img_wrapper img {
+            width: 100%;
+        }
 
-    .wrap {
-        margin: auto;
-        width: 800px;
-        text-align: center;
-    }
+        .slide_left {
+            font-size: 4vh;
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            color: #007bff;
+        }
 
+        .slide_right {
+            font-size: 4vh;
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            color: #007bff;
+        }
 
-</style>
-<script>
-    $('.collapse').on('show.bs.collapse', function () {
+        .hair_name {
+            text-align: center;
+        }
+
+        .sub_title {
+            margin-top: 30px;
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        .date_pick_wrapper,
+        .time_pick_wrapper,
+        .etc_pick_wrapper {
+            width: 100%;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+        }
+
+        .date_pick,
+        .time_pick,
+        .etc_pick {
+            position: relative;
+            display: block;
+            box-sizing: border-box;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 0;
+            right: 40px;
+        }
+
+        .time_select {
+            width: 95%;
+            height: 30px;
+            display: block;
+            margin: 10px 0;
+        }
+
+        .etc_input {
+            width: 95%;
+            margin: auto;
+            height: 35px;
+            margin: 10px 0;
+        }
+
+        .reservation_btn {
+            width: 80%;
+            margin: auto;
+            display: block;
+        }
+
+        .reservation_history {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .list-group {
+            flex-direction: row;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        .card-title {
+            font-size: 3vh;
+        }
+
+        .card-text {
+            font-size: 2vh;
+        }
+
+        .nav {
+            margin-bottom: 50px;
+        }
+
+        .nav-fill .nav-item {
+            width: 33.3%;
+        }
+    </style>
+    <script>
+          $('.collapse').on('show.bs.collapse', function () {
         var target = $("[href='#" + $(this).prop("id") + "']");
         target.removeClass("fa-plus-square");
         target.addClass("fa-minus-square");
@@ -82,146 +187,296 @@
         target.removeClass("fa-minus-square");
         target.addClass("fa-plus-square");
     });
-</script>
-
-
-<head>
-    <title>title</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </script>
 </head>
 <body>
-<div class="wrap">
-    <h1 class="designer">Stylist</h1>
-    <div class="container-fluid" style="min-height: calc(100vh - 136px);">
-        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab">
-                    <a class="name" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse1"
-                       aria-expanded="false">
-                        주팔동
-                        <a href="https://www.instagram.com/"
-                           target="_blank">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                 class="bi bi-instagram" viewBox="0 0 16 16">
-                                <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
-                            </svg>
-                        </a>
-                    </a>
-                </div>
-                <div id="collapse1" class="panel-collapse collapse" role="tabpanel">
-                    <div class="panel-body">
-                        <li>2004년 / 국가 미용사 자격증 취득</li>
-                        <li>2007년 / MKMF 서울 미용대회 신인미용사상</li>
-                        <li>2015년 / GJMY 국제 미용 대회 입상</li>
-                        <li>2020년 / 피부미용 자격증 취득</li>
-                    </div>
-                </div>
-            </div>
-            <!-- -->
-            <!-- 하나의 item입니다.  -->
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab">
-                    <a class="name" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse2"
-                       aria-expanded="false">
-                        이광팔
-                        <a href="https://www.instagram.com/"
-                           target="_blank">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                 class="bi bi-instagram" viewBox="0 0 16 16">
-                                <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
-                            </svg>
-                        </a>
-                    </a>
-                </div>
-                <div id="collapse2" class="panel-collapse collapse" role="tabpanel">
-                    <div class="panel-body">
-                        <li>2007년 / 국가 미용사 자격증 취득</li>
-                        <li>2009년 / 전 관악헤어 수석디자이너</li>
-                        <li>2015년 / MKMF 남자 대상, 대전미용대회 신인미용사상</li>
-                        <li>2018년 / 피부미용 자격증 취득</li>
-                    </div>
-                </div>
-            </div>
+<div id="container">
+    <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">예약</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">리뷰</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">기업정보</a>
+        </li>
+    </ul>
 
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab">
-                    <a class="name" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse3"
-                       aria-expanded="false">
-                        곽두팔
-                        <a href="https://www.instagram.com/"
-                           target="_blank">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                 class="bi bi-instagram" viewBox="0 0 16 16">
-                                <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
-                            </svg>
-                        </a>
-                    </a>
-                </div>
-                <div id="collapse3" class="panel-collapse collapse" role="tabpanel">
-                    <div class="panel-body">
-                        <li>2010년 / 국가 미용사 자격증 획득</li>
-                        <li>2007년 / MKMF 남자 대상, 서울 미용대회 신인미용사상</li>
-                        <li>2015년 / DGMC 남자 대상, 대전 미용대회 신인미용사상</li>
-                        <li>2020년 / 현 예약헤어 수석디자이너</li>
-                    </div>
-                </div>
+    <div class="hair_img_wrapper">
+        <div class="slide_wrapper">
+            <div class="slide">
+                <img
+                        src="https://mblogthumb-phinf.pstatic.net/MjAyMDAxMjNfMTQ5/MDAxNTc5NzY4Njc2MTM0.Dlq5ykRfoO4TCYPjEsn-tLwlq0M-zqqlEtImoBz1uc4g.JUQ2-hYCOLak25O9gnHCoTNeKX6D1YuDDotskqIVPRAg.JPEG.kenmenshair99/2020%EB%82%A8%EC%9E%90%EC%9C%A0%ED%96%89%EB%A8%B8%EB%A6%AC,_%EB%82%A8%EC%9E%90_%EB%8C%84%EB%94%94%EC%BB%B7%EC%9C%BC%EB%A1%9C_%ED%95%B4%EB%B3%B4%EC%84%B8%EC%9A%94_(1).jpg?type=w800"
+                />
+                <div class="hair_name">댄디컷</div>
             </div>
+            <div class="slide">
+                <img
+                        src="https://mblogthumb-phinf.pstatic.net/MjAyMDAxMjNfMTQ5/MDAxNTc5NzY4Njc2MTM0.Dlq5ykRfoO4TCYPjEsn-tLwlq0M-zqqlEtImoBz1uc4g.JUQ2-hYCOLak25O9gnHCoTNeKX6D1YuDDotskqIVPRAg.JPEG.kenmenshair99/2020%EB%82%A8%EC%9E%90%EC%9C%A0%ED%96%89%EB%A8%B8%EB%A6%AC,_%EB%82%A8%EC%9E%90_%EB%8C%84%EB%94%94%EC%BB%B7%EC%9C%BC%EB%A1%9C_%ED%95%B4%EB%B3%B4%EC%84%B8%EC%9A%94_(1).jpg?type=w800"
+                />
+                <div class="hair_name">댄디컷2</div>
+            </div>
+            <div class="slide">
+                <img
+                        src="https://mblogthumb-phinf.pstatic.net/MjAyMDAxMjNfMTQ5/MDAxNTc5NzY4Njc2MTM0.Dlq5ykRfoO4TCYPjEsn-tLwlq0M-zqqlEtImoBz1uc4g.JUQ2-hYCOLak25O9gnHCoTNeKX6D1YuDDotskqIVPRAg.JPEG.kenmenshair99/2020%EB%82%A8%EC%9E%90%EC%9C%A0%ED%96%89%EB%A8%B8%EB%A6%AC,_%EB%82%A8%EC%9E%90_%EB%8C%84%EB%94%94%EC%BB%B7%EC%9C%BC%EB%A1%9C_%ED%95%B4%EB%B3%B4%EC%84%B8%EC%9A%94_(1).jpg?type=w800"
+                />
+                <div class="hair_name">댄디컷3</div>
+            </div>
+        </div>
+        <div class="slide_left"><i class="fas fa-arrow-circle-left"></i></div>
+        <div class="slide_right"><i class="fas fa-arrow-circle-right"></i></div>
+    </div>
 
+    <h3 class="sub_title">예약하기</h3>
+
+    <div class="time_block">
+        <div class="date_pick_wrapper">
+            <a class="date_pick" id="datepicker-input"
+            ><i class="fa fa-calendar-alt"></i>
+                <span> 6월 7일(월) </span>
+                <i class="fa arrow fa-arrow-alt-circle-down"></i
+                ></a>
         </div>
 
-
-        <div class="reservation-button">
-            <button class="btn btn-primary" type="button">예약하러가기!</button>
+        <div class="date_container" style="padding-left: 20px">
+            <div id="wrapper" style="margin-top: -1px"></div>
         </div>
-        <div class="introduce">
 
+        <hr/>
+        <div class="time_pick_wrapper">
+            <a class="time_pick"
+            ><i class="fa fa-clock"></i>
+                <span> 시간선택 </span>
+                <i class="fa arrow fa-arrow-alt-circle-down"></i
+                ></a>
+            <div class="inner_box" style="display: none">
+                <select class="time_select">
+                    <option value="">원하시는 시간을 선택해주세요</option>
+                    <option>09:00</option>
+                    <option>09:30</option>
+                    <option>10:00</option>
+                    <option>10:30</option>
+                </select>
+            </div>
+        </div>
 
-            <h1>관악점</h1>
+        <hr/>
 
-            <p>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt"
-                     viewBox="0 0 16 16">
-                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
-                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                </svg>
-                <a href="https://map.naver.com/v5/search/%EA%B4%80%EC%95%85%EC%8A%A4%ED%83%80%EB%B2%85%EC%8A%A4/place/21007596?placeSearchOption=fromNxList=true%26noredirect=1%26entry=pll&c=14128425.6589709,4506390.9946924,13,0,0,0,dh&placePath=%2Fhome%3Fentry=pll"
-                   target="_blank">서울시 관악구 봉천동 976-22 1층 예약헤어</a>
-                <br>
-                <br>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt"
-                     viewBox="0 0 16 16">
-                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
-                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                </svg>
-                <a href="https://map.naver.com/v5/search/%EA%B4%80%EC%95%85%EC%8A%A4%ED%83%80%EB%B2%85%EC%8A%A4/place/21007596?placeSearchOption=fromNxList=true%26noredirect=1%26entry=pll&c=14128425.6589709,4506390.9946924,13,0,0,0,dh&placePath=%2Fhome%3Fentry=pll"
-                   target="_blank">서울특별시 관악구 북부순환로 7534 (1층 예약헤어)</a>
+        <div class="etc_pick_wrapper">
+            <a class="etc_pick"
+            ><i class="fab fa-rocketchat"></i>
+                <span> 기타 건의사항 </span>
+                <i class="fa arrow fa-arrow-alt-circle-down"></i
+                ></a>
+            <div class="inner_box" style="display: none">
+                <input class="etc_input"/>
+            </div>
+        </div>
+        <hr/>
+    </div>
 
-                <br>
-                <br>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset"
-                     viewBox="0 0 16 16">
-                    <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5z"/>
-                </svg>
-                <a href="https://map.naver.com/v5/search/%EA%B4%80%EC%95%85%EC%8A%A4%ED%83%80%EB%B2%85%EC%8A%A4/place/21007596?placeSearchOption=fromNxList=true%26noredirect=1%26entry=pll&c=14128425.6589709,4506390.9946924,13,0,0,0,dh&placePath=%2Fhome%3Fentry=pll"
-                   target="_blank">010-1938-1435</a>
-                <br>
-                <br>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock"
-                     viewBox="0 0 16 16">
-                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
-                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
-                </svg>
-                <a href="https://map.naver.com/v5/search/%EA%B4%80%EC%95%85%EC%8A%A4%ED%83%80%EB%B2%85%EC%8A%A4/place/21007596?placeSearchOption=fromNxList=true%26noredirect=1%26entry=pll&c=14128425.6589709,4506390.9946924,13,0,0,0,dh&placePath=%2Fhome%3Fentry=pll"
-                   target="_blank">평일 10:30-20:00&nbsp;&nbsp;&nbsp;&nbsp;토요일 10:00-20:00&nbsp;&nbsp;&nbsp;&nbsp;일요일/공휴일
-                    10:30-20:00</a>
-            </p>
+    <button type="button" class="reservation_btn btn btn-primary">
+        예약완료
+    </button>
+
+    <h3 class="sub_title">나의 예약 현황</h3>
+    <div class="reservation_history">
+        <div class="card" style="width: 48%">
+            <div class="card-body">
+                <h2 class="card-title">2021.05.12</h2>
+                <p class="card-text">헤어스타일 : 댄디컷</p>
+                <p class="card-text">기타 건의사항 : 10분정도 늦을수도 있어요</p>
+                <a href="#" class="btn btn-primary">더보기</a>
+            </div>
+        </div>
+        <div class="card" style="width: 48%">
+            <div class="card-body">
+                <h2 class="card-title">2021.05.12</h2>
+                <p class="card-text">헤어스타일 : 댄디컷</p>
+                <p class="card-text">기타 건의사항 : 10분정도 늦을수도 있어요</p>
+                <a href="#" class="btn btn-primary">더보기</a>
+            </div>
+        </div>
+        <div class="card" style="width: 48%">
+            <div class="card-body">
+                <h2 class="card-title">2021.05.12</h2>
+                <p class="card-text">헤어스타일 : 댄디컷</p>
+                <p class="card-text">기타 건의사항 : 10분정도 늦을수도 있어요</p>
+                <a href="#" class="btn btn-primary">더보기</a>
+            </div>
+        </div>
+        <div class="card" style="width: 48%">
+            <div class="card-body">
+                <h2 class="card-title">2021.05.12</h2>
+                <p class="card-text">헤어스타일 : 댄디컷</p>
+                <p class="card-text">기타 건의사항 : 10분정도 늦을수도 있어요</p>
+                <a href="#" class="btn btn-primary">더보기</a>
+            </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    let todayDate = moment().format("MM월 DD일");
+    let todayDay;
 
-    </body>
+    let hair, date, time, etc, userId;
+
+    date = moment().format('YYYY-MM-DD');
+    const whatDay = (dayNum) => {
+        let day;
+        switch (dayNum) {
+            case 0:
+                day = "일";
+                break;
+            case 1:
+                day = "월";
+                break;
+            case 2:
+                day = "화";
+                break;
+            case 3:
+                day = "수";
+                break;
+            case 4:
+                day = "목";
+                break;
+            case 5:
+                day = "금";
+                break;
+            case 6:
+                day = "토";
+                break;
+        }
+        return day;
+    };
+
+    $(".date_pick span").html(`${todayDate} (${whatDay(moment().day())})`);
+
+    var datepicker = new tui.DatePicker("#wrapper", {
+        date: new Date(),
+        input: {
+            element: "#datepicker-input",
+            format: "yyyy-MM-dd",
+        },
+    });
+
+    const datePickerShowHide = () => {
+        if ($(".tui-datepicker").hasClass("tui-hidden")) {
+            $(".date_container").css("height", "");
+            $(".date_pick .arrow").removeClass("fa-arrow-alt-circle-up");
+            $(".date_pick .arrow").addClass("fa-arrow-alt-circle-down");
+        } else {
+            $(".date_container").css("height", "400px");
+            $(".date_pick .arrow").removeClass("fa-arrow-alt-circle-down");
+            $(".date_pick .arrow").addClass("fa-arrow-alt-circle-up");
+        }
+    };
+
+    datepicker.on("change", function () {
+        date = moment(datepicker.getDate()).format('YYYY-MM-DD');
+        let datePickDate = moment(datepicker.getDate()).format("MM월 DD일");
+
+        $(".date_pick span").html(
+            `${datePickDate} (${whatDay(moment(datepicker.getDate()).day())})`
+        );
+        $(".date_container").css("height", "");
+    });
+
+    $("#datepicker-input,#container").on("click", function () {
+        datePickerShowHide();
+    });
+
+    $(".time_block a").on("click", function () {
+        $(this).toggleClass("on");
+        if ($(this).hasClass("on")) {
+            $(this).children(".arrow").removeClass("fa-arrow-alt-circle-down");
+            $(this).children(".arrow").addClass("fa-arrow-alt-circle-up");
+            $(this).next(".inner_box").show();
+        } else {
+            $(this).children(".arrow").removeClass("fa-arrow-alt-circle-up");
+
+            $(this).children(".arrow").addClass("fa-arrow-alt-circle-down");
+            $(this).next(".inner_box").hide();
+        }
+    });
+
+    $(".slide_wrapper").slick({
+        infinite: true,
+        speed: 500,
+        fade: true,
+        cssEase: "linear",
+        nextArrow: $(".slide_right"),
+        prevArrow: $(".slide_left"),
+    });
+
+    const reservationHistoryCall = () => {
+        $.ajax({
+            type: "GET",
+            url: "/reservation_history",
+            success: function (result) {
+                $(".reservation_history").html("");
+                for (let property in result) {
+                    let {hair, date, time, etc} = result[property];
+                    let cardTemp = `
+        <div class="card" style="width: 48%">
+            <div class="card-body">
+                <h2 class="card-title"> ${date} / ${time}</h2>
+                <p class="card-text">헤어스타일 : ${hair}</p>
+                <p class="card-text">기타 건의사항 : ${etc}</p>
+            </div>
+        </div>
+`
+                    $(".reservation_history").append(cardTemp)
+                }
+            }
+        })
+    }
+    reservationHistoryCall();
+
+    $(".hair_img_wrapper .slide img").on("click", function () {
+        $(".hair_img_wrapper .slide img").css("filter", "")
+        $(this).css("filter", "brightness(0.5)")
+        hair = $(this).next().text()
+    })
+
+    $(".reservation_btn").on("click", function () {
+        time = $(".time_select").val();
+        etc = $(".etc_input").val();
+
+        let ajaxData = {
+            hair: hair,
+            time: time,
+            date: date,
+            etc: etc,
+            user_id: 'zlzlzlmo'
+        }
+
+        if (ajaxData['hair'] == undefined) {
+            alert("원하는 헤어스타일을 선택해주세요")
+            return false
+
+        } else if (ajaxData['date'] == undefined) {
+            alert("예약날짜를 선택해주세요")
+            return false
+
+        } else if (ajaxData['time'] == "") {
+            alert("예약시간을 선택해주세요")
+            return false
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/reservation_confirm",
+            data: ajaxData,
+            success: function (result) {
+                alert(result['msg'])
+                reservationHistoryCall();
+                location.reload();
+
+            }
+        })
+    })
+</script>
+</body>
 </html>
