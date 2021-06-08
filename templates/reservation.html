@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+    />
+    <link
+            rel="stylesheet"
+            href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css"
+    />
+    <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
+
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    />
+
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+    />
+    <script
+            type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+    ></script>
+
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            max-width: 720px;
+            margin: auto;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .hair_img_wrapper {
+            width: 80%;
+            margin: auto;
+            position: relative;
+        }
+
+        .hair_img_wrapper .slide {
+            cursor: pointer;
+        }
+
+        .hair_img_wrapper img {
+            width: 100%;
+        }
+
+        .slide_left {
+            font-size: 4vh;
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            color: #007bff;
+        }
+
+        .slide_right {
+            font-size: 4vh;
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            color: #007bff;
+        }
+
+        .hair_name {
+            text-align: center;
+        }
+
+        .sub_title {
+            margin-top: 30px;
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        .date_pick_wrapper,
+        .time_pick_wrapper,
+        .etc_pick_wrapper {
+            width: 100%;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+        }
+
+        .date_pick,
+        .time_pick,
+        .etc_pick {
+            position: relative;
+            display: block;
+            box-sizing: border-box;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 0;
+            right: 40px;
+        }
+
+        .time_select {
+            width: 95%;
+            height: 30px;
+            display: block;
+            margin: 10px 0;
+        }
+
+        .etc_input {
+            width: 95%;
+            margin: auto;
+            height: 35px;
+            margin: 10px 0;
+        }
+
+        .reservation_btn {
+            width: 80%;
+            margin: auto;
+            display: block;
+        }
+
+        .reservation_history {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .list-group {
+            flex-direction: row;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        .card-title {
+            font-size: 3vh;
+        }
+
+        .card-text {
+            font-size: 2vh;
+        }
+
+        .nav {
+            margin-bottom: 50px;
+        }
+
+        .nav-fill .nav-item {
+            width: 33.3%;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">예약</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">리뷰</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">기업정보</a>
+        </li>
+    </ul>
+
+    <div class="hair_img_wrapper">
+        <div class="slide_wrapper">
+            <div class="slide">
+                <img
+                        src="https://mblogthumb-phinf.pstatic.net/MjAyMDAxMjNfMTQ5/MDAxNTc5NzY4Njc2MTM0.Dlq5ykRfoO4TCYPjEsn-tLwlq0M-zqqlEtImoBz1uc4g.JUQ2-hYCOLak25O9gnHCoTNeKX6D1YuDDotskqIVPRAg.JPEG.kenmenshair99/2020%EB%82%A8%EC%9E%90%EC%9C%A0%ED%96%89%EB%A8%B8%EB%A6%AC,_%EB%82%A8%EC%9E%90_%EB%8C%84%EB%94%94%EC%BB%B7%EC%9C%BC%EB%A1%9C_%ED%95%B4%EB%B3%B4%EC%84%B8%EC%9A%94_(1).jpg?type=w800"
+                />
+                <div class="hair_name">댄디컷</div>
+            </div>
+            <div class="slide">
+                <img
+                        src="https://mblogthumb-phinf.pstatic.net/MjAyMDAxMjNfMTQ5/MDAxNTc5NzY4Njc2MTM0.Dlq5ykRfoO4TCYPjEsn-tLwlq0M-zqqlEtImoBz1uc4g.JUQ2-hYCOLak25O9gnHCoTNeKX6D1YuDDotskqIVPRAg.JPEG.kenmenshair99/2020%EB%82%A8%EC%9E%90%EC%9C%A0%ED%96%89%EB%A8%B8%EB%A6%AC,_%EB%82%A8%EC%9E%90_%EB%8C%84%EB%94%94%EC%BB%B7%EC%9C%BC%EB%A1%9C_%ED%95%B4%EB%B3%B4%EC%84%B8%EC%9A%94_(1).jpg?type=w800"
+                />
+                <div class="hair_name">댄디컷2</div>
+            </div>
+            <div class="slide">
+                <img
+                        src="https://mblogthumb-phinf.pstatic.net/MjAyMDAxMjNfMTQ5/MDAxNTc5NzY4Njc2MTM0.Dlq5ykRfoO4TCYPjEsn-tLwlq0M-zqqlEtImoBz1uc4g.JUQ2-hYCOLak25O9gnHCoTNeKX6D1YuDDotskqIVPRAg.JPEG.kenmenshair99/2020%EB%82%A8%EC%9E%90%EC%9C%A0%ED%96%89%EB%A8%B8%EB%A6%AC,_%EB%82%A8%EC%9E%90_%EB%8C%84%EB%94%94%EC%BB%B7%EC%9C%BC%EB%A1%9C_%ED%95%B4%EB%B3%B4%EC%84%B8%EC%9A%94_(1).jpg?type=w800"
+                />
+                <div class="hair_name">댄디컷3</div>
+            </div>
+        </div>
+        <div class="slide_left"><i class="fas fa-arrow-circle-left"></i></div>
+        <div class="slide_right"><i class="fas fa-arrow-circle-right"></i></div>
+    </div>
+
+    <h3 class="sub_title">예약하기</h3>
+
+    <div class="time_block">
+        <div class="date_pick_wrapper">
+            <a class="date_pick" id="datepicker-input"
+            ><i class="fa fa-calendar-alt"></i>
+                <span> 6월 7일(월) </span>
+                <i class="fa arrow fa-arrow-alt-circle-down"></i
+                ></a>
+        </div>
+
+        <div class="date_container" style="padding-left: 20px">
+            <div id="wrapper" style="margin-top: -1px"></div>
+        </div>
+
+        <hr/>
+        <div class="time_pick_wrapper">
+            <a class="time_pick"
+            ><i class="fa fa-clock"></i>
+                <span> 시간선택 </span>
+                <i class="fa arrow fa-arrow-alt-circle-down"></i
+                ></a>
+            <div class="inner_box" style="display: none">
+                <select class="time_select">
+                    <option value="">원하시는 시간을 선택해주세요</option>
+                    <option>09:00</option>
+                    <option>09:30</option>
+                    <option>10:00</option>
+                    <option>10:30</option>
+                </select>
+            </div>
+        </div>
+
+        <hr/>
+
+        <div class="etc_pick_wrapper">
+            <a class="etc_pick"
+            ><i class="fab fa-rocketchat"></i>
+                <span> 기타 건의사항 </span>
+                <i class="fa arrow fa-arrow-alt-circle-down"></i
+                ></a>
+            <div class="inner_box" style="display: none">
+                <input class="etc_input"/>
+            </div>
+        </div>
+        <hr/>
+    </div>
+
+    <button type="button" class="reservation_btn btn btn-primary">
+        예약완료
+    </button>
+
+    <h3 class="sub_title">나의 예약 현황</h3>
+    <div class="reservation_history">
+        <div class="card" style="width: 48%">
+            <div class="card-body">
+                <h2 class="card-title">2021.05.12</h2>
+                <p class="card-text">헤어스타일 : 댄디컷</p>
+                <p class="card-text">기타 건의사항 : 10분정도 늦을수도 있어요</p>
+                <a href="#" class="btn btn-primary">더보기</a>
+            </div>
+        </div>
+        <div class="card" style="width: 48%">
+            <div class="card-body">
+                <h2 class="card-title">2021.05.12</h2>
+                <p class="card-text">헤어스타일 : 댄디컷</p>
+                <p class="card-text">기타 건의사항 : 10분정도 늦을수도 있어요</p>
+                <a href="#" class="btn btn-primary">더보기</a>
+            </div>
+        </div>
+        <div class="card" style="width: 48%">
+            <div class="card-body">
+                <h2 class="card-title">2021.05.12</h2>
+                <p class="card-text">헤어스타일 : 댄디컷</p>
+                <p class="card-text">기타 건의사항 : 10분정도 늦을수도 있어요</p>
+                <a href="#" class="btn btn-primary">더보기</a>
+            </div>
+        </div>
+        <div class="card" style="width: 48%">
+            <div class="card-body">
+                <h2 class="card-title">2021.05.12</h2>
+                <p class="card-text">헤어스타일 : 댄디컷</p>
+                <p class="card-text">기타 건의사항 : 10분정도 늦을수도 있어요</p>
+                <a href="#" class="btn btn-primary">더보기</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    let todayDate = moment().format("MM월 DD일");
+    let todayDay;
+
+    let hair, date, time, etc, userId;
+
+    date = moment().format('YYYY-MM-DD');
+    const whatDay = (dayNum) => {
+        let day;
+        switch (dayNum) {
+            case 0:
+                day = "일";
+                break;
+            case 1:
+                day = "월";
+                break;
+            case 2:
+                day = "화";
+                break;
+            case 3:
+                day = "수";
+                break;
+            case 4:
+                day = "목";
+                break;
+            case 5:
+                day = "금";
+                break;
+            case 6:
+                day = "토";
+                break;
+        }
+        return day;
+    };
+
+    $(".date_pick span").html(`${todayDate} (${whatDay(moment().day())})`);
+
+    var datepicker = new tui.DatePicker("#wrapper", {
+        date: new Date(),
+        input: {
+            element: "#datepicker-input",
+            format: "yyyy-MM-dd",
+        },
+    });
+
+    const datePickerShowHide = () => {
+        if ($(".tui-datepicker").hasClass("tui-hidden")) {
+            $(".date_container").css("height", "");
+            $(".date_pick .arrow").removeClass("fa-arrow-alt-circle-up");
+            $(".date_pick .arrow").addClass("fa-arrow-alt-circle-down");
+        } else {
+            $(".date_container").css("height", "400px");
+            $(".date_pick .arrow").removeClass("fa-arrow-alt-circle-down");
+            $(".date_pick .arrow").addClass("fa-arrow-alt-circle-up");
+        }
+    };
+
+    datepicker.on("change", function () {
+        date = moment(datepicker.getDate()).format('YYYY-MM-DD');
+        let datePickDate = moment(datepicker.getDate()).format("MM월 DD일");
+
+        $(".date_pick span").html(
+            `${datePickDate} (${whatDay(moment(datepicker.getDate()).day())})`
+        );
+        $(".date_container").css("height", "");
+    });
+
+    $("#datepicker-input,#container").on("click", function () {
+        datePickerShowHide();
+    });
+
+    $(".time_block a").on("click", function () {
+        $(this).toggleClass("on");
+        if ($(this).hasClass("on")) {
+            $(this).children(".arrow").removeClass("fa-arrow-alt-circle-down");
+            $(this).children(".arrow").addClass("fa-arrow-alt-circle-up");
+            $(this).next(".inner_box").show();
+        } else {
+            $(this).children(".arrow").removeClass("fa-arrow-alt-circle-up");
+
+            $(this).children(".arrow").addClass("fa-arrow-alt-circle-down");
+            $(this).next(".inner_box").hide();
+        }
+    });
+
+    $(".slide_wrapper").slick({
+        infinite: true,
+        speed: 500,
+        fade: true,
+        cssEase: "linear",
+        nextArrow: $(".slide_right"),
+        prevArrow: $(".slide_left"),
+    });
+
+    const reservationHistoryCall = () => {
+        $.ajax({
+            type: "GET",
+            url: "/reservation_history",
+            success: function (result) {
+                $(".reservation_history").html("");
+                for (let property in result) {
+                    let {hair, date, time, etc} = result[property];
+                    let cardTemp = `
+        <div class="card" style="width: 48%">
+            <div class="card-body">
+                <h2 class="card-title"> ${date} / ${time}</h2>
+                <p class="card-text">헤어스타일 : ${hair}</p>
+                <p class="card-text">기타 건의사항 : ${etc}</p>
+            </div>
+        </div>
+`
+                    $(".reservation_history").append(cardTemp)
+                }
+            }
+        })
+    }
+    reservationHistoryCall();
+
+    $(".hair_img_wrapper .slide img").on("click", function () {
+        $(".hair_img_wrapper .slide img").css("filter", "")
+        $(this).css("filter", "brightness(0.5)")
+        hair = $(this).next().text()
+    })
+
+    $(".reservation_btn").on("click", function () {
+        time = $(".time_select").val();
+        etc = $(".etc_input").val();
+
+        let ajaxData = {
+            hair: hair,
+            time: time,
+            date: date,
+            etc: etc,
+            user_id: 'zlzlzlmo'
+        }
+
+        if (ajaxData['hair'] == undefined) {
+            alert("원하는 헤어스타일을 선택해주세요")
+            return false
+
+        } else if (ajaxData['date'] == undefined) {
+            alert("예약날짜를 선택해주세요")
+            return false
+
+        } else if (ajaxData['time'] == "") {
+            alert("예약시간을 선택해주세요")
+            return false
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/reservation_confirm",
+            data: ajaxData,
+            success: function (result) {
+                alert(result['msg'])
+                reservationHistoryCall();
+                location.reload();
+
+            }
+        })
+    })
+</script>
+</body>
+</html>
