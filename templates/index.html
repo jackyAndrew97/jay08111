@@ -212,10 +212,34 @@
             </div>
             <div class="slide">
                 <img
+                        src="https://t4.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/2fG8/image/2v-ZpFu6c6Fiux6W-IulKLY1HnM.jpg
+"
+                />
+                <div class="hair_name">웨이브펌</div>
+            </div>
+            <div class="slide">
+                <img
                         src="https://mblogthumb-phinf.pstatic.net/MjAyMDAxMjNfMTQ5/MDAxNTc5NzY4Njc2MTM0.Dlq5ykRfoO4TCYPjEsn-tLwlq0M-zqqlEtImoBz1uc4g.JUQ2-hYCOLak25O9gnHCoTNeKX6D1YuDDotskqIVPRAg.JPEG.kenmenshair99/2020%EB%82%A8%EC%9E%90%EC%9C%A0%ED%96%89%EB%A8%B8%EB%A6%AC,_%EB%82%A8%EC%9E%90_%EB%8C%84%EB%94%94%EC%BB%B7%EC%9C%BC%EB%A1%9C_%ED%95%B4%EB%B3%B4%EC%84%B8%EC%9A%94_(1).jpg?type=w800"
                 />
                 <div class="hair_name">댄디컷</div>
             </div>
+
+                      <div class="slide">
+                <img
+                        src="https://i.pinimg.com/564x/7f/e0/42/7fe042b2f218fb549d8279df99bf2bb5.jpg
+"
+                />
+                <div class="hair_name">리젠트컷</div>
+            </div>
+
+                      <div class="slide">
+                <img
+                        src="http://evanstyle.co.kr/web/product/big/201903/ca0111e002505088e874457c93f19fd8.png"
+                />
+                <div class="hair_name">가르마펌</div>
+            </div>
+
+
         </div>
         <div class="slide_left"><i class="fas fa-arrow-circle-left"></i></div>
         <div class="slide_right"><i class="fas fa-arrow-circle-right"></i></div>
@@ -246,10 +270,17 @@
             <div class="inner_box" style="display: none">
                 <select class="time_select">
                     <option value="">원하시는 시간을 선택해주세요</option>
-                    <option>09:00</option>
-                    <option>09:30</option>
                     <option>10:00</option>
-                    <option>10:30</option>
+                    <option>11:00</option>
+                    <option>12:00</option>
+                    <option>13:00</option>
+                    <option>14:00</option>
+                    <option>15:00</option>
+                    <option>16:00</option>
+                    <option>17:00</option>
+                    <option>18:00</option>
+                    <option>19:00</option>
+                    <option>20:00</option>
                 </select>
             </div>
         </div>
@@ -374,8 +405,8 @@
     const reservationHistoryCall = () => {
         $.ajax({
             type: "GET",
-            data:{
-                user_id : sessionStorage.getItem('user_id')
+            data: {
+                user_id: sessionStorage.getItem('user_id')
             },
             url: "/reservation_history",
             success: function (result) {
@@ -417,7 +448,7 @@
             time: time,
             date: date,
             etc: etc,
-            user_id: 'zlzlzlmo'
+            user_id: sessionStorage.getItem('user_id')
         }
 
         if (ajaxData['hair'] == undefined) {
