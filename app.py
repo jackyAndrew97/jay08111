@@ -160,6 +160,5 @@ def reservation_post():
 
    return jsonify({'result':'success', 'msg': '예약이 완료되었습니다!'})
 
-
 if __name__ == '__main__':
     app.run('0.0.0.0', port=8080, debug=True)
