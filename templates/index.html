@@ -314,7 +314,7 @@
     let todayDay;
 
     let hair, date, time, etc, userId;
-
+    userId = sessionStorage.getItem('user_id');
     date = moment().format('YYYY-MM-DD');
     const whatDay = (dayNum) => {
         let day;
@@ -406,7 +406,7 @@
         $.ajax({
             type: "GET",
             data: {
-                user_id: sessionStorage.getItem('user_id')
+                user_id: userId
             },
             url: "/reservation_history",
             success: function (result) {
@@ -448,7 +448,7 @@
             time: time,
             date: date,
             etc: etc,
-            user_id: sessionStorage.getItem('user_id')
+            user_id: userId
         }
 
         if (ajaxData['hair'] == undefined) {
