@@ -197,7 +197,7 @@
     </ul>
 
     <div class="hair_img_wrapper">
-        <div class="slide_wrapper">
+        <div class="slide_wrapper women">
             <div class="slide">
                 <img
                         src="https://cdn.imweb.me/upload/S20201005f584d937f796b/b1600ff6a7531.jpg"
@@ -217,6 +217,9 @@
                 />
                 <div class="hair_name">웨이브펌</div>
             </div>
+        </div>
+
+        <div class="slide_wrapper men">
             <div class="slide">
                 <img
                         src="https://mblogthumb-phinf.pstatic.net/MjAyMDAxMjNfMTQ5/MDAxNTc5NzY4Njc2MTM0.Dlq5ykRfoO4TCYPjEsn-tLwlq0M-zqqlEtImoBz1uc4g.JUQ2-hYCOLak25O9gnHCoTNeKX6D1YuDDotskqIVPRAg.JPEG.kenmenshair99/2020%EB%82%A8%EC%9E%90%EC%9C%A0%ED%96%89%EB%A8%B8%EB%A6%AC,_%EB%82%A8%EC%9E%90_%EB%8C%84%EB%94%94%EC%BB%B7%EC%9C%BC%EB%A1%9C_%ED%95%B4%EB%B3%B4%EC%84%B8%EC%9A%94_(1).jpg?type=w800"
@@ -224,15 +227,15 @@
                 <div class="hair_name">댄디컷</div>
             </div>
 
-                      <div class="slide">
+            <div class="slide">
                 <img
                         src="https://i.pinimg.com/564x/7f/e0/42/7fe042b2f218fb549d8279df99bf2bb5.jpg
-"
+        "
                 />
                 <div class="hair_name">리젠트컷</div>
             </div>
 
-                      <div class="slide">
+            <div class="slide">
                 <img
                         src="http://evanstyle.co.kr/web/product/big/201903/ca0111e002505088e874457c93f19fd8.png"
                 />
@@ -376,7 +379,7 @@
         $(".date_container").css("height", "");
     });
 
-    $("#datepicker-input,#container").on("click", function () {
+    $("#datepicker-input,#container,.date_pick .arrow").on("click", function () {
         datePickerShowHide();
     });
 
@@ -393,14 +396,6 @@
         }
     });
 
-    $(".slide_wrapper").slick({
-        infinite: true,
-        speed: 500,
-        fade: true,
-        cssEase: "linear",
-        nextArrow: $(".slide_right"),
-        prevArrow: $(".slide_left"),
-    });
 
     const reservationHistoryCall = () => {
         $.ajax({
@@ -414,6 +409,25 @@
                     $(".reservation_history").html("");
 
                 }
+                let gender = sessionStorage.getItem('gender');
+                let wrapper;
+                if (gender == '여') {
+                    $(".hair_img_wrapper .men").hide()
+                    wrapper = 'women'
+                } else {
+                    $(".hair_img_wrapper .women").hide()
+                    wrapper = 'men'
+                }
+
+                $(`.${wrapper}`).slick({
+                    infinite: true,
+                    speed: 500,
+                    fade: true,
+                    cssEase: "linear",
+                    nextArrow: $(".slide_right"),
+                    prevArrow: $(".slide_left"),
+                });
+
                 for (let property in result) {
                     let {hair, date, time, etc} = result[property];
                     etc = etc == "" ? "없음" : etc;

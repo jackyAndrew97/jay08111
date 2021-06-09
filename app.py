@@ -66,7 +66,7 @@ def sign_in():
 
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
 
-        return jsonify({'result': 'success', 'token': token,'user_id':result['username']})
+        return jsonify({'result': 'success', 'token': token,'user_id':result['username'],'gender':result['gender']})
     # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
@@ -76,14 +76,13 @@ def sign_in():
 def sign_up():
     username_receive = request.form['username_give']
     password_receive = request.form['password_give']
+    gender_receive = request.form['gender_give']
     password_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
     doc = {
         "username": username_receive,                               # 아이디
         "password": password_hash,                                  # 비밀번호
-        "profile_name": username_receive,                           # 프로필 이름 기본값은 아이디
-        "profile_pic": "",                                          # 프로필 사진 파일 이름
-        "profile_pic_real": "profile_pics/profile_placeholder.png", # 프로필 사진 기본 이미지
-        "profile_info": ""                                          # 프로필 한 마디
+        "profile_name": username_receive,
+        'gender' : gender_receive,                                  # 프로필 이름 기본값은 아이디
     }
     db.users.insert_one(doc)
     return jsonify({'result': 'success'})
