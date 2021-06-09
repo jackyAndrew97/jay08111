@@ -4,24 +4,15 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-
-
     <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
-    />
-    <link
-            rel="stylesheet"
-            href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css"/>
     <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
 
-    <link
-            rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
     />
 
     <link
@@ -209,21 +200,21 @@
         <div class="slide_wrapper">
             <div class="slide">
                 <img
+                        src="https://cdn.imweb.me/upload/S20201005f584d937f796b/b1600ff6a7531.jpg"
+                />
+                <div class="hair_name">중단발</div>
+            </div>
+            <div class="slide">
+                <img
+                        src="https://blog.kakaocdn.net/dn/kCjKi/btqBGpRJkAy/gkB8Hy1oFU2KbyUjK8hUzK/img.jpg"
+                />
+                <div class="hair_name">레이어드컷</div>
+            </div>
+            <div class="slide">
+                <img
                         src="https://mblogthumb-phinf.pstatic.net/MjAyMDAxMjNfMTQ5/MDAxNTc5NzY4Njc2MTM0.Dlq5ykRfoO4TCYPjEsn-tLwlq0M-zqqlEtImoBz1uc4g.JUQ2-hYCOLak25O9gnHCoTNeKX6D1YuDDotskqIVPRAg.JPEG.kenmenshair99/2020%EB%82%A8%EC%9E%90%EC%9C%A0%ED%96%89%EB%A8%B8%EB%A6%AC,_%EB%82%A8%EC%9E%90_%EB%8C%84%EB%94%94%EC%BB%B7%EC%9C%BC%EB%A1%9C_%ED%95%B4%EB%B3%B4%EC%84%B8%EC%9A%94_(1).jpg?type=w800"
                 />
                 <div class="hair_name">댄디컷</div>
-            </div>
-            <div class="slide">
-                <img
-                        src="https://mblogthumb-phinf.pstatic.net/MjAyMDAxMjNfMTQ5/MDAxNTc5NzY4Njc2MTM0.Dlq5ykRfoO4TCYPjEsn-tLwlq0M-zqqlEtImoBz1uc4g.JUQ2-hYCOLak25O9gnHCoTNeKX6D1YuDDotskqIVPRAg.JPEG.kenmenshair99/2020%EB%82%A8%EC%9E%90%EC%9C%A0%ED%96%89%EB%A8%B8%EB%A6%AC,_%EB%82%A8%EC%9E%90_%EB%8C%84%EB%94%94%EC%BB%B7%EC%9C%BC%EB%A1%9C_%ED%95%B4%EB%B3%B4%EC%84%B8%EC%9A%94_(1).jpg?type=w800"
-                />
-                <div class="hair_name">댄디컷2</div>
-            </div>
-            <div class="slide">
-                <img
-                        src="https://mblogthumb-phinf.pstatic.net/MjAyMDAxMjNfMTQ5/MDAxNTc5NzY4Njc2MTM0.Dlq5ykRfoO4TCYPjEsn-tLwlq0M-zqqlEtImoBz1uc4g.JUQ2-hYCOLak25O9gnHCoTNeKX6D1YuDDotskqIVPRAg.JPEG.kenmenshair99/2020%EB%82%A8%EC%9E%90%EC%9C%A0%ED%96%89%EB%A8%B8%EB%A6%AC,_%EB%82%A8%EC%9E%90_%EB%8C%84%EB%94%94%EC%BB%B7%EC%9C%BC%EB%A1%9C_%ED%95%B4%EB%B3%B4%EC%84%B8%EC%9A%94_(1).jpg?type=w800"
-                />
-                <div class="hair_name">댄디컷3</div>
             </div>
         </div>
         <div class="slide_left"><i class="fas fa-arrow-circle-left"></i></div>
@@ -284,7 +275,7 @@
 
     <h3 class="sub_title">나의 예약 현황</h3>
     <div class="reservation_history">
-
+        지금까지의 예약 현황이 존재하지 않습니다.
     </div>
 </div>
 <script type="text/javascript">
@@ -366,7 +357,6 @@
             $(this).next(".inner_box").show();
         } else {
             $(this).children(".arrow").removeClass("fa-arrow-alt-circle-up");
-
             $(this).children(".arrow").addClass("fa-arrow-alt-circle-down");
             $(this).next(".inner_box").hide();
         }
@@ -384,9 +374,15 @@
     const reservationHistoryCall = () => {
         $.ajax({
             type: "GET",
+            data:{
+                user_id : sessionStorage.getItem('user_id')
+            },
             url: "/reservation_history",
             success: function (result) {
-                $(".reservation_history").html("");
+                if (result.length > 0) {
+                    $(".reservation_history").html("");
+
+                }
                 for (let property in result) {
                     let {hair, date, time, etc} = result[property];
                     etc = etc == "" ? "없음" : etc;

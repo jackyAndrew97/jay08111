@@ -102,6 +102,7 @@
         success: function (response) {
             if (response['result'] == 'success') {
                 $.cookie('mytoken', response['token'], {path: '/'});
+                sessionStorage.setItem('user_id',response.user_id)
                 window.location.replace("/")
             } else {
                 alert(response['msg'])

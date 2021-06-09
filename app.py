@@ -62,9 +62,10 @@ def sign_in():
          'id': username_receive,
          'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
         }
+
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
 
-        return jsonify({'result': 'success', 'token': token})
+        return jsonify({'result': 'success', 'token': token,'user_id':result['username']})
     # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
@@ -140,13 +141,13 @@ def update_like():
 @app.route('/reservation_history', methods=['GET'])
 def reservation_get():
    # user_id는 로그인한 정보에서 받아야함
-   reservation_history = list(db.reservation.find({'user_id': 'zlzlzlmo'}, {'_id': False}))
+   userId = request.args.get('user_id')
+   reservation_history = list(db.reservation.find({'user_id': userId}, {'_id': False}))
    return jsonify(reservation_history)
 
 @app.route('/reservation_confirm', methods=['POST'])
 def reservation_post():
    db = client.revHair
-
    hair = request.form.get('hair');
    time = request.form.get('time');
    date = request.form.get('date');
